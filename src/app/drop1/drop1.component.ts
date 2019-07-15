@@ -8,7 +8,7 @@ import {CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem} from '@angular
 })
 export class Drop1Component implements OnInit {
 
-  @Input() dragItems;
+  @Input() dragItems = [];
 
   constructor() { }
 

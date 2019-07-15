@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild } from '@angular/core';
+import { CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
+import { ComponentResolverService } from '../component-resolver.service';
+import { ElementItem } from '../item';
 
 @Component({
   selector: 'app-drop2',
@@ -8,22 +11,33 @@ import {CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem} from '@angular
 })
 export class Drop2Component implements OnInit {
   @Input() dragItems;
+  public myComponents: ElementItem[] = [];
 
-  constructor() { }
+  constructor(
+    private componentResolverService: ComponentResolverService,
+    private componentFactoryResolver: ComponentFactoryResolver
+    ) { }
 
   ngOnInit() {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('drop', event);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
+    const index = event.previousIndex;
+    const data = event.previousContainer.data[index];
+    this.dragItems.push(data);
+
+    // Use factory
+    const newComponent: ElementItem = this.componentResolverService.getFancyComponent(data);
+    this.myComponents.push(newComponent);
+    this.componentFactoryResolver.resolveComponentFactory(newComponent);
+    // if (event.previousContainer === event.container) {
+    //   moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    // } else {
+    //   transferArrayItem(event.previousContainer.data,
+    //                     event.container.data,
+    //                     event.previousIndex,
+    //                     event.currentIndex);
+    // }
   }
 
 }

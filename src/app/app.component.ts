@@ -17,17 +17,17 @@ export class AppComponent {
     'f4'
   ];
   metrics = [
-    'm1',
-    'm2',
-    'm3',
-    'm4'
+    { type: 'metric', value: 23, name: 'm1' },
+    { type: 'metric', value: 23, name: 'm2' },
+    { type: 'metric', value: 23, name: 'm3' },
+    { type: 'metric', value: 23, name: 'm4' },
   ];
 
   attributes = [
-    'a1',
-    'a2',
-    'a3',
-    'a4'
+    { type: 'attribute', value: 56, name: 'a1' },
+    { type: 'attribute', value: 34, name: 'a2' },
+    { type: 'attribute', value: 66, name: 'a3' },
+    { type: 'attribute', value: 345, name: 'a4' },
   ];
   title = 'dragdrop';
 

@@ -16,15 +16,21 @@ export class DragComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('drop', event);
+    // Preventor
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+      return;
     }
+
+    // Drop area returning
+    const index = event.previousIndex;
+    const data: any = event.previousContainer.data[index];
+
+    // Find index in this one
+    const myIndex = this.dragItems.findIndex(dragItem => dragItem.name === data.name);
+    transferArrayItem(event.previousContainer.data,
+      [],
+      event.previousIndex,
+      event.currentIndex);
   }
 
   specialUseCase(drag?: CdkDrag, drop?: any) {

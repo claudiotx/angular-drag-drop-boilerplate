@@ -1,13 +1,9 @@
 <h4> Drop 2 </h4>
-<div class="example-list"
-cdkDropList
-#drop2List="cdkDropList"
-[cdkDropListData]="dragItems"
-(cdkDropListDropped)="drop($event)"
-(cdkDropEntered)="entered($event)"
-(cdkDropExited)="exited($event)"
-[cdkDropListConnectedTo]="[flatList]">
-<div class="example-box" *ngFor="let item of dragItems" cdkDrag>{{item}}</div>
+<div class="example-list" id="drop2List" cdkDropList #drop2List="cdkDropList" [cdkDropListData]="dragItems"
+  (cdkDropListDropped)="drop($event)" (cdkDropEntered)="entered($event)" (cdkDropExited)="exited($event)"
+  [cdkDropListConnectedTo]="['dragList', 'drag1List']">
+  <div class="example-box" *ngFor="let item of dragItems" cdkDrag>
+    <ng-template> {{myComponents}} </ng-template>
+    {{item.name}}
+  </div>
 </div>
-
-

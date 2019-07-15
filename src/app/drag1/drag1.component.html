@@ -6,8 +6,8 @@ cdkDropList
 (cdkDropListDropped)="drop($event)"
 (cdkDropEntered)="entered($event)"
 (cdkDropExited)="exited($event)"
-[cdkDropListConnectedTo]="[flatList]">
-<div class="example-box" *ngFor="let item of dragItems" cdkDrag>{{item}}</div>
+[cdkDropListConnectedTo]="[drop1List, drop2List]">
+<div class="example-box" *ngFor="let item of dragItems" cdkDrag>{{item.name}}</div>
 </div>
 
 
